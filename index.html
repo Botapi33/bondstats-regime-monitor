@@ -38,9 +38,24 @@ html,
 body {
   margin: 0;
   padding: 0;
+
+  width: 100%;
+  max-width: 100%;
+
+  overflow-x: hidden;
+
   background:
-    radial-gradient(circle at 15% 0%, rgba(47,214,135,0.07), transparent 25%),
-    linear-gradient(180deg, #050707 0%, #030505 100%);
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(47,214,135,0.07),
+      transparent 25%
+    ),
+    linear-gradient(
+      180deg,
+      #050707 0%,
+      #030505 100%
+    );
+
   color: var(--text);
 
   font-family:
@@ -59,10 +74,17 @@ body {
 .shell {
   width: 100%;
   max-width: 1320px;
+
   margin: 0 auto;
 
+  min-width: 0;
+
   background:
-    linear-gradient(180deg, rgba(10,14,13,0.96), rgba(5,8,7,0.985));
+    linear-gradient(
+      180deg,
+      rgba(10,14,13,0.96),
+      rgba(5,8,7,0.985)
+    );
 
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -81,6 +103,8 @@ body {
   justify-content: space-between;
   align-items: center;
 
+  gap: 20px;
+
   min-height: 48px;
 
   padding: 0 22px;
@@ -98,12 +122,17 @@ body {
 .brandline {
   display: flex;
   align-items: center;
+
   gap: 11px;
+
+  min-width: 0;
 }
 
 .live-dot {
   width: 7px;
   height: 7px;
+
+  flex: 0 0 auto;
 
   border-radius: 50%;
 
@@ -121,11 +150,19 @@ body {
 
   letter-spacing: 0.19em;
   text-transform: uppercase;
+
+  overflow-wrap: anywhere;
 }
 
 .top-meta {
   display: flex;
   gap: 18px;
+
+  flex-wrap: wrap;
+
+  justify-content: flex-end;
+
+  min-width: 0;
 
   color: var(--muted-2);
 
@@ -152,6 +189,10 @@ body {
     1px solid var(--line);
 }
 
+.hero > * {
+  min-width: 0;
+}
+
 .hero-title {
   margin: 0;
 
@@ -165,6 +206,8 @@ body {
   letter-spacing: -0.045em;
 
   font-weight: 650;
+
+  overflow-wrap: break-word;
 }
 
 .hero-subtitle {
@@ -176,6 +219,8 @@ body {
 
   font-size: 14px;
   line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
 .hero-right {
@@ -184,10 +229,14 @@ body {
   justify-content: space-between;
 
   gap: 24px;
+
+  min-width: 0;
 }
 
 .hero-meta-block {
   padding-top: 2px;
+
+  min-width: 0;
 }
 
 .hero-meta-label {
@@ -207,6 +256,8 @@ body {
   line-height: 1.35;
 
   font-weight: 600;
+
+  overflow-wrap: anywhere;
 }
 
 .hero-meta-sub {
@@ -216,6 +267,8 @@ body {
 
   font-size: 11px;
   line-height: 1.5;
+
+  overflow-wrap: anywhere;
 }
 
 /* CURRENT REGIME */
@@ -235,6 +288,8 @@ body {
       rgba(47,214,135,0.01) 38%,
       transparent 72%
     );
+
+  min-width: 0;
 }
 
 .regime-section::before {
@@ -276,6 +331,8 @@ body {
   letter-spacing: -0.05em;
 
   font-weight: 650;
+
+  overflow-wrap: break-word;
 }
 
 .regime-description {
@@ -287,6 +344,8 @@ body {
 
   font-size: 14px;
   line-height: 1.75;
+
+  overflow-wrap: anywhere;
 }
 
 /* SIGNALS */
@@ -294,12 +353,16 @@ body {
 .signal-section {
   border-bottom:
     1px solid var(--line);
+
+  min-width: 0;
 }
 
 .section-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  gap: 18px;
 
   padding: 18px 30px;
 
@@ -324,19 +387,24 @@ body {
 
   letter-spacing: 0.09em;
   text-transform: uppercase;
+
+  text-align: right;
 }
 
 .signal-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(5, 1fr);
+    repeat(5, minmax(0, 1fr));
+
+  min-width: 0;
 }
 
 .signal {
   padding: 22px 20px 21px;
 
   min-height: 158px;
+  min-width: 0;
 
   border-right:
     1px solid var(--line);
@@ -358,7 +426,11 @@ body {
   justify-content: space-between;
   align-items: center;
 
+  gap: 10px;
+
   margin-bottom: 20px;
+
+  min-width: 0;
 }
 
 .signal-label {
@@ -369,12 +441,18 @@ body {
 
   letter-spacing: 0.13em;
   text-transform: uppercase;
+
+  min-width: 0;
+
+  overflow-wrap: anywhere;
 }
 
 .signal-index {
   color: var(--muted-2);
 
   font-size: 9px;
+
+  flex: 0 0 auto;
 
   font-variant-numeric:
     tabular-nums;
@@ -388,6 +466,8 @@ body {
   letter-spacing: -0.025em;
 
   font-weight: 650;
+
+  overflow-wrap: anywhere;
 }
 
 .signal-detail {
@@ -397,6 +477,8 @@ body {
 
   font-size: 11px;
   line-height: 1.5;
+
+  overflow-wrap: anywhere;
 }
 
 .positive {
@@ -419,13 +501,15 @@ body {
 
   border-bottom:
     1px solid var(--line);
+
+  min-width: 0;
 }
 
 .market-strip {
   display: grid;
 
   grid-template-columns:
-    repeat(6, 1fr);
+    repeat(6, minmax(0, 1fr));
 
   margin-top: 13px;
 
@@ -435,6 +519,8 @@ body {
   border-radius: 11px;
 
   overflow: hidden;
+
+  min-width: 0;
 }
 
 .market-cell {
@@ -442,6 +528,8 @@ body {
     15px
     15px
     14px;
+
+  min-width: 0;
 
   border-right:
     1px solid var(--line);
@@ -467,6 +555,8 @@ body {
   text-transform: uppercase;
 
   font-weight: 700;
+
+  overflow-wrap: anywhere;
 }
 
 .market-value {
@@ -480,6 +570,8 @@ body {
 
   font-variant-numeric:
     tabular-nums;
+
+  overflow-wrap: anywhere;
 }
 
 /* LOWER SECTION */
@@ -488,8 +580,10 @@ body {
   display: grid;
 
   grid-template-columns:
-    1.2fr
-    0.8fr;
+    minmax(0, 1.2fr)
+    minmax(0, 0.8fr);
+
+  min-width: 0;
 }
 
 .interpretation {
@@ -497,6 +591,8 @@ body {
 
   border-right:
     1px solid var(--line);
+
+  min-width: 0;
 }
 
 .methodology {
@@ -504,6 +600,8 @@ body {
 
   background:
     rgba(255,255,255,0.008);
+
+  min-width: 0;
 }
 
 .lower-title {
@@ -516,6 +614,8 @@ body {
   letter-spacing: -0.025em;
 
   font-weight: 630;
+
+  overflow-wrap: anywhere;
 }
 
 .lower-text {
@@ -528,6 +628,8 @@ body {
   font-size: 13px;
 
   line-height: 1.75;
+
+  overflow-wrap: anywhere;
 }
 
 .method-list {
@@ -535,14 +637,16 @@ body {
 
   border-top:
     1px solid var(--line);
+
+  min-width: 0;
 }
 
 .method-row {
   display: grid;
 
   grid-template-columns:
-    1fr
-    1.2fr;
+    minmax(0, 0.8fr)
+    minmax(0, 1.2fr);
 
   gap: 18px;
 
@@ -550,12 +654,18 @@ body {
 
   border-bottom:
     1px solid rgba(255,255,255,0.04);
+
+  min-width: 0;
 }
 
 .method-left {
   color: #d9e1dd;
 
   font-size: 11px;
+
+  min-width: 0;
+
+  overflow-wrap: anywhere;
 }
 
 .method-right {
@@ -564,6 +674,10 @@ body {
   font-size: 11px;
 
   text-align: right;
+
+  min-width: 0;
+
+  overflow-wrap: anywhere;
 }
 
 /* FOOTER */
@@ -592,6 +706,14 @@ body {
   text-transform: uppercase;
 
   letter-spacing: 0.07em;
+
+  min-width: 0;
+}
+
+.footer > div {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
 }
 
 .footer strong {
@@ -638,9 +760,11 @@ body {
 
   font-size: 13px;
   line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
-/* MOBILE */
+/* RESPONSIVE */
 
 @media (max-width: 1050px) {
 
@@ -650,12 +774,19 @@ body {
 
   .hero-right {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
   .signal-grid {
     grid-template-columns:
-      repeat(2, 1fr);
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .signal {
+    border-bottom:
+      1px solid var(--line);
   }
 
   .signal:nth-child(even) {
@@ -664,20 +795,26 @@ body {
 
   .signal:last-child {
     grid-column: 1 / -1;
+
+    border-bottom: 0;
   }
 
   .market-strip {
     grid-template-columns:
-      repeat(3, 1fr);
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .market-cell {
+    border-bottom:
+      1px solid var(--line);
   }
 
   .market-cell:nth-child(3n) {
     border-right: 0;
   }
 
-  .market-cell:nth-child(-n+3) {
-    border-bottom:
-      1px solid var(--line);
+  .market-cell:nth-last-child(-n+3) {
+    border-bottom: 0;
   }
 
   .lower {
@@ -690,6 +827,7 @@ body {
     border-bottom:
       1px solid var(--line);
   }
+
 }
 
 @media (max-width: 620px) {
@@ -716,6 +854,7 @@ body {
 
   .topbar {
     display: block;
+
     padding-top: 13px;
     padding-bottom: 13px;
   }
@@ -723,11 +862,21 @@ body {
   .top-meta {
     margin-top: 10px;
 
-    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 
   .hero-right {
     grid-template-columns: 1fr;
+  }
+
+  .section-head {
+    display: block;
+  }
+
+  .section-head-note {
+    margin-top: 8px;
+
+    text-align: left;
   }
 
   .signal-grid {
@@ -737,19 +886,28 @@ body {
   .signal,
   .signal:nth-child(even) {
     border-right: 0;
+
+    border-bottom:
+      1px solid var(--line);
   }
 
   .signal:last-child {
     grid-column: auto;
+
+    border-bottom: 0;
   }
 
   .market-strip {
     grid-template-columns:
-      repeat(2, 1fr);
+      repeat(2, minmax(0, 1fr));
   }
 
+  .market-cell,
   .market-cell:nth-child(3n) {
     border-right:
+      1px solid var(--line);
+
+    border-bottom:
       1px solid var(--line);
   }
 
@@ -757,13 +915,16 @@ body {
     border-right: 0;
   }
 
-  .market-cell {
-    border-bottom:
-      1px solid var(--line);
-  }
-
   .market-cell:nth-last-child(-n+2) {
     border-bottom: 0;
+  }
+
+  .method-row {
+    grid-template-columns:
+      minmax(0, 0.7fr)
+      minmax(0, 1.3fr);
+
+    gap: 12px;
   }
 
   .footer {
@@ -773,6 +934,7 @@ body {
   .footer div + div {
     margin-top: 7px;
   }
+
 }
 
 </style>
@@ -780,67 +942,118 @@ body {
 
 <body>
 
-<div
-  id="app"
-  class="shell"
->
+<div id="app" class="shell">
+
   <div class="loading">
     Loading market regime…
   </div>
+
 </div>
+
 
 <script>
 
-const API_URL =
-  "./data.json";
+const API_URL = "./data.json";
+
 
 function toneClass(tone) {
 
-  if (tone === "positive")
+  if (tone === "positive") {
     return "positive";
+  }
 
-  if (tone === "negative")
+  if (tone === "negative") {
     return "negative";
+  }
 
   return "neutral";
 }
 
+
+function safeNumber(value) {
+
+  const n =
+    Number(value);
+
+  return Number.isFinite(n)
+    ? n
+    : null;
+}
+
+
 function pct(value) {
 
-  if (
-    value === null ||
-    value === undefined
-  ) {
+  const n =
+    safeNumber(value);
+
+  if (n === null) {
     return "—";
   }
 
-  return Number(value)
-    .toFixed(2) + "%";
+  return n.toFixed(2) + "%";
 }
+
 
 function bp(value) {
 
-  if (
-    value === null ||
-    value === undefined
-  ) {
+  const n =
+    safeNumber(value);
+
+  if (n === null) {
     return "—";
   }
 
   return Math.round(
-    Number(value) * 100
+    n * 100
   ) + " bp";
 }
 
+
+function fixed(value, decimals = 3) {
+
+  const n =
+    safeNumber(value);
+
+  if (n === null) {
+    return "—";
+  }
+
+  return n.toFixed(decimals);
+}
+
+
+function safeText(value) {
+
+  if (
+    value === null ||
+    value === undefined ||
+    value === ""
+  ) {
+    return "—";
+  }
+
+  return String(value);
+}
+
+
 function formatDate(date) {
 
-  if (!date)
+  if (!date) {
     return "—";
+  }
 
   const d =
     new Date(
       date + "T00:00:00"
     );
+
+  if (
+    Number.isNaN(
+      d.getTime()
+    )
+  ) {
+    return safeText(date);
+  }
 
   return d.toLocaleDateString(
     "en-US",
@@ -852,13 +1065,38 @@ function formatDate(date) {
   );
 }
 
+
 function render(data) {
 
-  const s = data.signals;
-  const r = data.raw;
+  const s =
+    data.signals || {};
 
-  document.getElementById("app")
+  const r =
+    data.raw || {};
+
+  const policy =
+    s.policy || {};
+
+  const curve =
+    s.curve || {};
+
+  const realRates =
+    s.realRates || {};
+
+  const credit =
+    s.credit || {};
+
+  const inflation =
+    s.inflation || {};
+
+  const regime =
+    data.regime || {};
+
+
+  document
+    .getElementById("app")
     .innerHTML = `
+
 
       <div class="topbar">
 
@@ -871,6 +1109,7 @@ function render(data) {
           </div>
 
         </div>
+
 
         <div class="top-meta">
 
@@ -953,11 +1192,11 @@ function render(data) {
         </div>
 
         <h2 class="regime-name">
-          ${data.regime.name}
+          ${safeText(regime.name)}
         </h2>
 
         <div class="regime-description">
-          ${data.regime.description}
+          ${safeText(regime.description)}
         </div>
 
       </section>
@@ -980,6 +1219,7 @@ function render(data) {
 
         <div class="signal-grid">
 
+
           <div class="signal">
 
             <div class="signal-top">
@@ -996,16 +1236,14 @@ function render(data) {
 
             <div class="
               signal-value
-              ${toneClass(
-                s.policy.tone
-              )}
+              ${toneClass(policy.tone)}
             ">
-              ${s.policy.label}
+              ${safeText(policy.label)}
             </div>
 
             <div class="signal-detail">
               2-Year Treasury<br>
-              ${s.policy.detail}
+              ${safeText(policy.detail)}
             </div>
 
           </div>
@@ -1027,16 +1265,14 @@ function render(data) {
 
             <div class="
               signal-value
-              ${toneClass(
-                s.curve.tone
-              )}
+              ${toneClass(curve.tone)}
             ">
-              ${s.curve.label}
+              ${safeText(curve.label)}
             </div>
 
             <div class="signal-detail">
               10Y − 2Y<br>
-              ${s.curve.detail}
+              ${safeText(curve.detail)}
             </div>
 
           </div>
@@ -1058,16 +1294,14 @@ function render(data) {
 
             <div class="
               signal-value
-              ${toneClass(
-                s.realRates.tone
-              )}
+              ${toneClass(realRates.tone)}
             ">
-              ${s.realRates.label}
+              ${safeText(realRates.label)}
             </div>
 
             <div class="signal-detail">
               10Y Real Yield<br>
-              ${s.realRates.detail}
+              ${safeText(realRates.detail)}
             </div>
 
           </div>
@@ -1089,16 +1323,14 @@ function render(data) {
 
             <div class="
               signal-value
-              ${toneClass(
-                s.credit.tone
-              )}
+              ${toneClass(credit.tone)}
             ">
-              ${s.credit.label}
+              ${safeText(credit.label)}
             </div>
 
             <div class="signal-detail">
               Chicago Fed Credit<br>
-              ${s.credit.detail}
+              ${safeText(credit.detail)}
             </div>
 
           </div>
@@ -1120,19 +1352,18 @@ function render(data) {
 
             <div class="
               signal-value
-              ${toneClass(
-                s.inflation.tone
-              )}
+              ${toneClass(inflation.tone)}
             ">
-              ${s.inflation.label}
+              ${safeText(inflation.label)}
             </div>
 
             <div class="signal-detail">
               5-Year Breakeven<br>
-              ${s.inflation.detail}
+              ${safeText(inflation.detail)}
             </div>
 
           </div>
+
 
         </div>
 
@@ -1145,7 +1376,9 @@ function render(data) {
           Underlying Market Data
         </div>
 
+
         <div class="market-strip">
+
 
           <div class="market-cell">
 
@@ -1206,11 +1439,7 @@ function render(data) {
             </div>
 
             <div class="market-value">
-              ${
-                Number(
-                  r.creditIndex
-                ).toFixed(3)
-              }
+              ${fixed(r.creditIndex, 3)}
             </div>
 
           </div>
@@ -1228,12 +1457,14 @@ function render(data) {
 
           </div>
 
+
         </div>
 
       </section>
 
 
       <section class="lower">
+
 
         <div class="interpretation">
 
@@ -1242,11 +1473,11 @@ function render(data) {
           </div>
 
           <h3 class="lower-title">
-            ${data.regime.name}
+            ${safeText(regime.name)}
           </h3>
 
           <div class="lower-text">
-            ${data.regime.description}
+            ${safeText(regime.description)}
           </div>
 
         </div>
@@ -1262,7 +1493,9 @@ function render(data) {
             Transparent Inputs
           </h3>
 
+
           <div class="method-list">
+
 
             <div class="method-row">
 
@@ -1328,9 +1561,11 @@ function render(data) {
 
             </div>
 
+
           </div>
 
         </div>
+
 
       </section>
 
@@ -1354,8 +1589,10 @@ function render(data) {
 
       </footer>
 
+
   `;
 }
+
 
 async function loadMonitor() {
 
@@ -1372,6 +1609,7 @@ async function loadMonitor() {
         }
       );
 
+
     if (!response.ok) {
 
       throw new Error(
@@ -1380,24 +1618,30 @@ async function loadMonitor() {
 
     }
 
+
     const data =
       await response.json();
 
-    if (!data.ok) {
+
+    if (!data || !data.ok) {
 
       throw new Error(
-        data.error ||
-        data.message ||
+        data?.error ||
+        data?.message ||
         "Market data unavailable."
       );
 
     }
 
+
     render(data);
+
 
   } catch (error) {
 
-    document.getElementById("app")
+
+    document
+      .getElementById("app")
       .innerHTML = `
 
         <div class="error">
@@ -1412,7 +1656,10 @@ async function loadMonitor() {
 
           <br><br>
 
-          ${error.message}
+          ${
+            error?.message ||
+            "Unknown error."
+          }
 
         </div>
 
@@ -1421,6 +1668,7 @@ async function loadMonitor() {
   }
 
 }
+
 
 loadMonitor();
 
