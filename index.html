@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bond Market Regime Monitor | BondStats</title>
+
+<style>
+
+:root {
+  --bg: #050607;
+  --panel: #090b0d;
+  --panel2: #0c0e10;
+  --line: #202428;
+  --line2: #2a2f34;
+
+  --text: #f4f4f2;
+  --muted: #8d949a;
+  --muted2: #646b71;
+
+  --yellow: #f0c419;
+  --blue: #55a8ff;
+  --orange: #ff8a35;
+  --green: #64c986;
+  --red: #e56b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+body {
+  padding: 28px 24px 30px;
+}
+
+.monitor {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.eyebrow {
+  color: var(--yellow);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  margin-bottom: 13px;
+}
+
+.header {
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--line);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+
+  font-size: clamp(28px, 4vw, 46px);
+
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  font-weight: 650;
+}
+
+.subtitle {
+  margin-top: 11px;
+  max-width: 720px;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.updated {
+  flex-shrink: 0;
+
+  padding-top: 7px;
+
+  color: var(--muted2);
+
+  font-size: 11px;
+  text-align: right;
+  line-height: 1.55;
+}
+
+/* REGIME */
+
+.regime {
+  padding: 35px 0 31px;
+  border-bottom: 1px solid var(--line);
+}
+
+.regime-label {
+  color: var(--muted);
+
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+
+  margin-bottom: 10px;
+}
+
+.regime-name {
+  color: var(--yellow);
+
+  font-size: clamp(30px, 4.2vw, 52px);
+
+  font-weight: 650;
+  line-height: 1;
+
+  letter-spacing: -0.035em;
+}
+
+.regime-description {
+  margin-top: 17px;
+
+  max-width: 850px;
+
+  color: #b2b6b9;
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* SIGNAL GRID */
+
+.signals {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+
+.signal {
+  min-height: 163px;
+
+  padding: 23px 18px 22px;
+
+  border-right: 1px solid var(--line);
+}
+
+.signal:last-child {
+  border-right: 0;
+}
+
+.signal-title {
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  margin-bottom: 20px;
+}
+
+.signal-value {
+  font-size: 17px;
+  line-height: 1.25;
+
+  font-weight: 650;
+
+  margin-bottom: 9px;
+}
+
+.signal-detail {
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.signal-rule {
+  width: 24px;
+  height: 2px;
+
+  background: var(--blue);
+
+  margin-bottom: 15px;
+}
+
+.signal:nth-child(2) .signal-rule {
+  background: var(--yellow);
+}
+
+.signal:nth-child(3) .signal-rule {
+  background: #9aa0a6;
+}
+
+.signal:nth-child(4) .signal-rule {
+  background: var(--orange);
+}
+
+.signal:nth-child(5) .signal-rule {
+  background: var(--green);
+}
+
+/* STATUS */
+
+.positive {
+  color: var(--green);
+}
+
+.negative {
+  color: var(--orange);
+}
+
+.neutral {
+  color: #e6e6e3;
+}
+
+/* RAW MARKET */
+
+.market-section {
+  padding: 29px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-title {
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+
+  margin-bottom: 17px;
+}
+
+.market-grid {
+  display: grid;
+
+  grid-template-columns: repeat(6, 1fr);
+
+  gap: 9px;
+}
+
+.market-item {
+  background: var(--panel);
+
+  border: 1px solid var(--line);
+
+  padding: 15px 15px 14px;
+}
+
+.market-label {
+  color: var(--muted2);
+
+  font-size: 9px;
+  line-height: 1.35;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  min-height: 27px;
+}
+
+.market-value {
+  margin-top: 8px;
+
+  font-size: 19px;
+
+  font-variant-numeric: tabular-nums;
+}
+
+/* INTERPRETATION */
+
+.interpretation {
+  display: grid;
+
+  grid-template-columns: 1.4fr 1fr;
+
+  gap: 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.interpretation-main {
+  padding: 30px 30px 30px 0;
+
+  border-right: 1px solid var(--line);
+}
+
+.interpretation-side {
+  padding: 30px 0 30px 30px;
+}
+
+.interpretation-title {
+  font-size: 21px;
+
+  letter-spacing: -0.02em;
+
+  margin-bottom: 11px;
+}
+
+.interpretation-text {
+  color: #aeb3b6;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  max-width: 720px;
+}
+
+.method-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 8px 0;
+
+  border-bottom: 1px solid #16191b;
+
+  font-size: 11px;
+}
+
+.method-row:last-child {
+  border-bottom: 0;
+}
+
+.method-left {
+  color: #d9dcde;
+}
+
+.method-right {
+  color: var(--muted2);
+
+  text-align: right;
+}
+
+/* FOOTER */
+
+.footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-top: 22px;
+
+  color: var(--muted2);
+
+  font-size: 10px;
+
+  line-height: 1.55;
+}
+
+.footer strong {
+  color: #949a9f;
+  font-weight: 600;
+}
+
+/* LOADING */
+
+.loading {
+  min-height: 430px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  letter-spacing: 0.08em;
+}
+
+.error {
+  max-width: 720px;
+
+  margin: 80px auto;
+
+  padding: 25px;
+
+  border: 1px solid #532e24;
+
+  color: #e6a288;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+  body {
+    padding: 22px 17px 25px;
+  }
+
+  .header-top {
+    display: block;
+  }
+
+  .updated {
+    text-align: left;
+    padding-top: 14px;
+  }
+
+  .signals {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .signal {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .signal:nth-child(even) {
+    border-right: 0;
+  }
+
+  .signal:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .market-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .interpretation {
+    grid-template-columns: 1fr;
+  }
+
+  .interpretation-main {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+
+    padding: 26px 0;
+  }
+
+  .interpretation-side {
+    padding: 26px 0;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .signals {
+    grid-template-columns: 1fr;
+  }
+
+  .signal,
+  .signal:nth-child(even) {
+    border-right: 0;
+  }
+
+  .signal:last-child {
+    grid-column: auto;
+  }
+
+  .market-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    display: block;
+  }
+
+  .footer div + div {
+    margin-top: 8px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="app" class="monitor">
+  <div class="loading">
+    Loading fixed-income signals…
+  </div>
+</div>
+
+<script>
+
+/*
+=========================================================
+GITHUB DATA SOURCE
+=========================================================
+*/
+
+const API_URL = "./data.json";
+
+/*
+=========================================================
+HELPERS
+=========================================================
+*/
+
+function toneClass(tone) {
+
+  if (tone === "positive")
+    return "positive";
+
+  if (tone === "negative")
+    return "negative";
+
+  return "neutral";
+}
+
+function pct(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return "—";
+  }
+
+  return Number(value).toFixed(2) + "%";
+}
+
+function bp(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return "—";
+  }
+
+  return Math.round(
+    Number(value) * 100
+  ) + " bp";
+}
+
+function formatDate(date) {
+
+  if (!date)
+    return "—";
+
+  const d =
+    new Date(
+      date + "T00:00:00"
+    );
+
+  return d.toLocaleDateString(
+    "en-US",
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    }
+  );
+}
+
+/*
+=========================================================
+RENDER
+=========================================================
+*/
+
+function render(data) {
+
+  const s = data.signals;
+  const r = data.raw;
+
+  document.getElementById("app")
+    .innerHTML = `
+
+    <header class="header">
+
+      <div class="eyebrow">
+        FIXED INCOME ANALYTICS
+      </div>
+
+      <div class="header-top">
+
+        <div>
+
+          <h1 class="title">
+            Bond Market Regime Monitor
+          </h1>
+
+          <div class="subtitle">
+            Track the market signals shaping
+            growth, inflation, policy and
+            financial conditions.
+          </div>
+
+        </div>
+
+        <div class="updated">
+          DATA THROUGH<br>
+          ${formatDate(data.asOf)}
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <section class="regime">
+
+      <div class="regime-label">
+        CURRENT FIXED-INCOME REGIME
+      </div>
+
+      <div class="regime-name">
+        ${data.regime.name}
+      </div>
+
+      <div class="regime-description">
+        ${data.regime.description}
+      </div>
+
+    </section>
+
+
+    <section class="signals">
+
+      <div class="signal">
+
+        <div class="signal-rule"></div>
+
+        <div class="signal-title">
+          POLICY EXPECTATIONS
+        </div>
+
+        <div class="
+          signal-value
+          ${toneClass(s.policy.tone)}
+        ">
+          ${s.policy.label}
+        </div>
+
+        <div class="signal-detail">
+          2Y Treasury<br>
+          ${s.policy.detail}
+        </div>
+
+      </div>
+
+
+      <div class="signal">
+
+        <div class="signal-rule"></div>
+
+        <div class="signal-title">
+          YIELD CURVE
+        </div>
+
+        <div class="
+          signal-value
+          ${toneClass(s.curve.tone)}
+        ">
+          ${s.curve.label}
+        </div>
+
+        <div class="signal-detail">
+          10Y − 2Y<br>
+          ${s.curve.detail}
+        </div>
+
+      </div>
+
+
+      <div class="signal">
+
+        <div class="signal-rule"></div>
+
+        <div class="signal-title">
+          REAL RATES
+        </div>
+
+        <div class="
+          signal-value
+          ${toneClass(s.realRates.tone)}
+        ">
+          ${s.realRates.label}
+        </div>
+
+        <div class="signal-detail">
+          10Y Real Yield<br>
+          ${s.realRates.detail}
+        </div>
+
+      </div>
+
+
+      <div class="signal">
+
+        <div class="signal-rule"></div>
+
+        <div class="signal-title">
+          CREDIT CONDITIONS
+        </div>
+
+        <div class="
+          signal-value
+          ${toneClass(s.credit.tone)}
+        ">
+          ${s.credit.label}
+        </div>
+
+        <div class="signal-detail">
+          Chicago Fed<br>
+          ${s.credit.detail}
+        </div>
+
+      </div>
+
+
+      <div class="signal">
+
+        <div class="signal-rule"></div>
+
+        <div class="signal-title">
+          INFLATION PRICING
+        </div>
+
+        <div class="
+          signal-value
+          ${toneClass(s.inflation.tone)}
+        ">
+          ${s.inflation.label}
+        </div>
+
+        <div class="signal-detail">
+          5Y Breakeven<br>
+          ${s.inflation.detail}
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="market-section">
+
+      <div class="section-title">
+        UNDERLYING MARKET DATA
+      </div>
+
+      <div class="market-grid">
+
+
+        <div class="market-item">
+
+          <div class="market-label">
+            2-Year Treasury
+          </div>
+
+          <div class="market-value">
+            ${pct(r.twoYear)}
+          </div>
+
+        </div>
+
+
+        <div class="market-item">
+
+          <div class="market-label">
+            10-Year Treasury
+          </div>
+
+          <div class="market-value">
+            ${pct(r.tenYear)}
+          </div>
+
+        </div>
+
+
+        <div class="market-item">
+
+          <div class="market-label">
+            2s10s Curve
+          </div>
+
+          <div class="market-value">
+            ${bp(r.curve)}
+          </div>
+
+        </div>
+
+
+        <div class="market-item">
+
+          <div class="market-label">
+            10-Year Real Yield
+          </div>
+
+          <div class="market-value">
+            ${pct(r.realYield10Y)}
+          </div>
+
+        </div>
+
+
+        <div class="market-item">
+
+          <div class="market-label">
+            Credit Subindex
+          </div>
+
+          <div class="market-value">
+            ${Number(
+              r.creditIndex
+            ).toFixed(3)}
+          </div>
+
+        </div>
+
+
+        <div class="market-item">
+
+          <div class="market-label">
+            5-Year Breakeven
+          </div>
+
+          <div class="market-value">
+            ${pct(r.breakeven5Y)}
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <section class="interpretation">
+
+      <div class="interpretation-main">
+
+        <div class="section-title">
+          WHAT THE COMBINATION MEANS
+        </div>
+
+        <div class="interpretation-title">
+          ${data.regime.name}
+        </div>
+
+        <div class="interpretation-text">
+          ${data.regime.description}
+        </div>
+
+      </div>
+
+
+      <div class="interpretation-side">
+
+        <div class="section-title">
+          METHODOLOGY
+        </div>
+
+        <div class="method-row">
+          <span class="method-left">
+            Policy
+          </span>
+          <span class="method-right">
+            2Y trend
+          </span>
+        </div>
+
+        <div class="method-row">
+          <span class="method-left">
+            Curve
+          </span>
+          <span class="method-right">
+            10Y − 2Y
+          </span>
+        </div>
+
+        <div class="method-row">
+          <span class="method-left">
+            Real rates
+          </span>
+          <span class="method-right">
+            10Y TIPS
+          </span>
+        </div>
+
+        <div class="method-row">
+          <span class="method-left">
+            Credit
+          </span>
+          <span class="method-right">
+            Chicago Fed
+          </span>
+        </div>
+
+        <div class="method-row">
+          <span class="method-left">
+            Inflation
+          </span>
+          <span class="method-right">
+            5Y breakeven
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer class="footer">
+
+      <div>
+        Sources:
+        <strong>
+          Federal Reserve / FRED ·
+          Federal Reserve Bank of Chicago
+        </strong>
+      </div>
+
+      <div>
+        Rules-based classification ·
+        No AI-generated signal
+      </div>
+
+    </footer>
+
+  `;
+}
+
+
+/*
+=========================================================
+LOAD
+=========================================================
+*/
+
+async function loadMonitor() {
+
+  try {
+
+    const response =
+      await fetch(
+        API_URL + "?v=" + Date.now(),
+        {
+          cache: "no-store"
+        }
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        "Market data request failed."
+      );
+    }
+
+    const data =
+      await response.json();
+
+    if (!data.ok) {
+      throw new Error(
+        data.error ||
+        data.message ||
+        "Market data unavailable."
+      );
+    }
+
+    render(data);
+
+  } catch (error) {
+
+    document.getElementById("app")
+      .innerHTML = `
+
+        <div class="error">
+
+          <strong>
+            Bond Market Regime Monitor
+          </strong>
+
+          <br><br>
+
+          Market data is temporarily unavailable.
+
+          <br><br>
+
+          ${
+            error.message
+          }
+
+        </div>
+
+      `;
+
+  }
+}
+
+loadMonitor();
+
+</script>
+
+</body>
+</html>
