@@ -2,7 +2,7 @@
   "ok": true,
   "title": "Bond Market Regime Monitor",
   "asOf": "2026-08-14",
-  "updatedAt": "2026-08-24T07:21:02.599735+00:00",
+  "updatedAt": "2026-08-25T07:08:31.954549+00:00",
   "regime": {
     "name": "BALANCED TRANSITION",
     "description": "The major fixed-income signals are mixed. Policy, inflation and credit conditions are not yet pointing decisively toward a single regime."
@@ -11,7 +11,7 @@
     "policy": {
       "label": "STABLE",
       "tone": "neutral",
-      "detail": "4.19%"
+      "detail": "4.24%"
     },
     "curve": {
       "label": "POSITIVE",
@@ -21,7 +21,7 @@
     "realRates": {
       "label": "RESTRICTIVE",
       "tone": "negative",
-      "detail": "2.35%"
+      "detail": "2.40%"
     },
     "credit": {
       "label": "STABLE",
@@ -31,15 +31,15 @@
     "inflation": {
       "label": "STABLE",
       "tone": "neutral",
-      "detail": "2.34%"
+      "detail": "2.32%"
     }
   },
   "raw": {
-    "twoYear": 4.19,
-    "tenYear": 4.69,
+    "twoYear": 4.24,
+    "tenYear": 4.74,
     "curve": 0.5,
-    "realYield10Y": 2.35,
+    "realYield10Y": 2.4,
     "creditIndex": -0.072,
-    "breakeven5Y": 2.34
+    "breakeven5Y": 2.32
   }
 }
