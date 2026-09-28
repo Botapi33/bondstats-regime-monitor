@@ -2,10 +2,10 @@
   "ok": true,
   "title": "Bond Market Regime Monitor",
   "asOf": "2026-09-18",
-  "updatedAt": "2026-09-25T11:51:26.279287+00:00",
+  "updatedAt": "2026-09-28T13:55:34.475301+00:00",
   "regime": {
-    "name": "LATE-CYCLE TIGHTENING",
-    "description": "Real rates remain restrictive and the curve is signalling limited room for policy to stay tight indefinitely. Financial conditions remain late-cycle."
+    "name": "BALANCED TRANSITION",
+    "description": "The major fixed-income signals are mixed. Policy, inflation and credit conditions are not yet pointing decisively toward a single regime."
   },
   "signals": {
     "policy": {
@@ -14,14 +14,14 @@
       "detail": "+0.68 pp / 20 sessions"
     },
     "curve": {
-      "label": "FLATTENING",
-      "tone": "negative",
-      "detail": "26 bp"
+      "label": "POSITIVE",
+      "tone": "positive",
+      "detail": "31 bp"
     },
     "realRates": {
       "label": "RESTRICTIVE",
       "tone": "negative",
-      "detail": "2.76%"
+      "detail": "2.85%"
     },
     "credit": {
       "label": "STABLE",
@@ -31,15 +31,15 @@
     "inflation": {
       "label": "STABLE",
       "tone": "neutral",
-      "detail": "2.33%"
+      "detail": "2.34%"
     }
   },
   "raw": {
-    "twoYear": 4.85,
-    "tenYear": 5.11,
-    "curve": 0.26,
-    "realYield10Y": 2.76,
+    "twoYear": 4.87,
+    "tenYear": 5.18,
+    "curve": 0.31,
+    "realYield10Y": 2.85,
     "creditIndex": -0.07,
-    "breakeven5Y": 2.33
+    "breakeven5Y": 2.34
   }
 }
